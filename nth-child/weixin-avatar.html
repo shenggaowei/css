@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        outline: 1px solid;
+        outline-offset: -1px;
+        flex: none;
+        width: 50%;
+      }
+      /* 只有一个元素 */
+      img:only-child {
+        width: 100%;
+      }
+      /* 既是第1个元素，又至少是倒数第5个元素。说明至少有5个元素 */
+      img:first-child:nth-last-child(n + 5),
+      img:first-child:nth-last-child(n + 5) ~ img {
+        width: calc(100% / 3);
+      }
+      .avatar {
+        display: flex;
+        align-content: center;
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+        width: 300px;
+        height: 300px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="avatar">
+      <img src="../assets/head.jpeg" alt="" />
+      <img src="../assets/head.jpeg" alt="" />
+      <img src="../assets/head.jpeg" alt="" />
+      <img src="../assets/head.jpeg" alt="" />
+    </div>
+  </body>
+</html>
