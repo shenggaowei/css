@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    :root {
+      box-sizing: border-box;
+    }
+
+    *,
+    ::before,
+    ::after {
+      box-sizing: inherit;
+    }
+
+    body {
+      background-color: #709b90;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .container {
+      display: grid;
+      /* grid-template-areas属性使用了一种ASCII art的语法，可以直接在CSS中画一个可视化的网格形象。该声明给出了一系列加引号字符串，每一个字符串代表网格的一行，字符串内用空格区分每一列。 */
+      /* 每个命名的网格区域必须组成一个矩形。不能创造更复杂的形状，比如L或者U型。 */
+      grid-template-areas: "title title" "nav nav" "main aside1" "main aside2";
+      /* 给每个垂直的网格线命名 */
+      grid-template-columns: 2fr 1fr;
+      /* 定义4行, 定义了四个水平网格轨道，高度为auto */
+      /* 因为展开的写法无法一目了然，所以才产生了repeat()这种简写方式。 */
+      grid-template-rows: repeat(4, auto);
+      gap: 1.5em;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    header {
+      grid-area: title;
+    }
+
+    nav {
+      grid-area: nav;
+    }
+
+    .main {
+      grid-area: main;
+    }
+
+    .sidebar-top {
+      grid-area: aside1;
+    }
+
+    .sidebar-bottom {
+      grid-area: aside2;
+    }
+
+    .tile {
+      padding: 1.5em;
+      background-color: #fff;
+    }
+
+    .tile > :first-child {
+      margin-top: 0;
+    }
+
+    /* + 兄弟关系，所有紧挨着任意左侧元素的右侧元素,除了第一个元素 */
+    .tile * + * {
+      margin-top: 1.5em;
+    }
+
+    .page-heading {
+      margin: 0;
+    }
+
+    .site-nav {
+      display: flex;
+      margin: 0;
+      padding: 0.5em;
+      background-color: #5f4b44;
+      list-style-type: none;
+      border-radius: 0.2em;
+    }
+
+    .site-nav > li {
+      margin-top: 0;
+    }
+
+    .site-nav > li > a {
+      display: block;
+      padding: 0.5em 1em;
+      background-color: #cc6b5a;
+      color: white;
+      text-decoration: none;
+    }
+
+    .site-nav > li + li {
+      margin-left: 1.5em;
+    }
+
+    .site-nav > .nav-right {
+      margin-left: auto;
+    }
+
+    .login-form h3 {
+      margin: 0;
+      font-size: 0.9em;
+      font-weight: bold;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .login-form input:not([type="checkbox"]):not([type="radio"]) {
+      display: block;
+      margin-top: 0;
+      width: 100%;
+    }
+
+    .login-form button {
+      margin-top: 1em;
+      border: 1px solid #cc6b5a;
+      background-color: white;
+      padding: 0.5em 1em;
+      cursor: pointer;
+    }
+
+    .centered {
+      text-align: center;
+    }
+
+    .cost {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 0.7;
+    }
+
+    .cost > span {
+      margin-top: 0;
+    }
+
+    .cost-currency {
+      font-size: 2rem;
+    }
+    .cost-dollars {
+      font-size: 4rem;
+    }
+    .cost-cents {
+      font-size: 1.5rem;
+      align-self: flex-start;
+    }
+
+    .cta-button {
+      display: block;
+      background-color: #cc6b5a;
+      color: white;
+      padding: 0.5em 1em;
+      text-decoration: none;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <header>
+        <h1 class="page-heading">Ink</h1>
+      </header>
+
+      <nav>
+        <ul class="site-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/features">Features</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/support">Support</a></li>
+          <li class="nav-right">
+            <a href="/about">About</a>
+          </li>
+        </ul>
+      </nav>
+
+      <main class="main tile">
+        <h1>Team collaboration done right</h1>
+        <p>Thousands of teams from all over the world turn to <b>Ink</b> to communicate and get things done.</p>
+      </main>
+
+      <div class="sidebar-top tile">
+        <form class="login-form">
+          <h3>Login</h3>
+          <p>
+            <label for="username">Username</label>
+            <input id="username" type="text" name="username" />
+          </p>
+          <p>
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" />
+          </p>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <div class="sidebar-bottom tile centered">
+        <small>Starting at</small>
+        <div class="cost">
+          <span class="cost-currency">$</span>
+          <span class="cost-dollars">20</span>
+          <span class="cost-cents">.00</span>
+        </div>
+        <a class="cta-button" href="/pricing"> Sign up </a>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+      /**
+       * grid-template-areas: "top  top    right"
+                         "left .      right"
+                         "left bottom bottom";
+
+    这个 CSS 规则定义了一个 3 行 3 列的网格布局，具体如下：
+
+    1. 第一行有 3 个网格单元：'top'、'top' 和 'right'
+    2. 第二行有 3 个网格单元：'left'、'.'（空单元）和 'right'
+    3. 第三行有 3 个网格单元：'left'、'bottom' 和 'bottom'
+
+    所以总共定义了 9 个网格单元。其中，'.' 表示一个空白或空闲的网格单元。
+
+
+  我们可以识别出以下几个命名的网格区域：
+
+  - `top`
+  - `right`
+  - `left`
+  - `bottom`
+
+  虽然 `.`, 表示一个空的网格单元格，但它并没有命名一个具体的区域。因此，这里实际上定义了 **4** 个命名的网格区域。
+
+       * /
+</script>
